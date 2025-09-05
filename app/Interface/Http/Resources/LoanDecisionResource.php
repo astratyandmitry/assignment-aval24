@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Interface\Http\Resources;
 
-use Faker\Provider\Base;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 final class LoanDecisionResource extends BaseResource
 {
