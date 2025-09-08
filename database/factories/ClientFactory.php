@@ -33,7 +33,7 @@ final class ClientFactory extends Factory
 
     public function correct(): static
     {
-        return $this->state(fn(array $attributes): array => [
+        return $this->state(fn (array $attributes): array => [
             'birth_date' => '2000-01-01',
             'monthly_income_usd' => 5000,
             'credit_score' => 1000,

@@ -12,7 +12,7 @@ final class EloquentLoanRepository implements LoanRepository
 {
     public function create(Loan $loan): Loan
     {
-        LoanMapper::toModel($loan)->save();
+        LoanMapper::toNewModel($loan)->save();
 
         return $loan;
     }

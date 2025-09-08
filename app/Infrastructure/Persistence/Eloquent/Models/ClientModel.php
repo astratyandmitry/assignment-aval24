@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Eloquent\Models;
 
-use App\Domain\Client\Enums\Region;
 use Database\Factories\ClientFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $credit_score
  * @property float $monthly_income_usd
  * @property \Carbon\Carbon $birth_date
- * @property \App\Domain\Client\Enums\Region|string $location_region
+ * @property string $location_region
  * @property \App\Infrastructure\Persistence\Eloquent\Models\LoanModel[]|\Illuminate\Database\Eloquent\Collection $loans
  */
 final class ClientModel extends BaseModel
@@ -30,7 +29,6 @@ final class ClientModel extends BaseModel
     protected function casts(): array
     {
         return [
-            'location_region' => Region::class,
             'credit_score' => 'integer',
             'monthly_income_usd' => 'float',
             'birth_date' => 'date',

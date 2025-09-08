@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Eloquent\Mappers;
 
 use App\Domain\Client\Entities\Client;
+use App\Domain\Client\Enums\Region;
 use App\Domain\Client\ValueObjects\EmailAddress;
 use App\Domain\Client\ValueObjects\PersonalIdentificationNumber;
 use App\Domain\Client\ValueObjects\PhoneNumber;
@@ -12,21 +13,25 @@ use App\Infrastructure\Persistence\Eloquent\Models\ClientModel;
 
 final class ClientMapper
 {
-    public static function toModel(Client $entity): ClientModel
+    public static function toExistingModel(Client $entity, ClientModel $model): ClientModel
     {
-        $model = new ClientModel;
-        $model->id = $entity->getId();
-        $model->full_name = $entity->getFullName();
-        $model->birth_date = $entity->getBirthDate();
-        $model->location_region = $entity->getRegion()->value;
-        $model->location_city = $entity->getCity();
-        $model->credit_score = $entity->getCreditScore();
-        $model->monthly_income_usd = $entity->getMonthlyIncomeusd();
-        $model->pin = (string) $entity->getPin();
-        $model->contact_email = (string) $entity->getEmail();
-        $model->contact_phone = (string) $entity->getPhone();
+        $model->id = $entity->id();
+        $model->full_name = $entity->fullName();
+        $model->birth_date = $entity->birthDate();
+        $model->location_region = $entity->region()->value;
+        $model->location_city = $entity->city();
+        $model->credit_score = $entity->creditScore();
+        $model->monthly_income_usd = $entity->monthlyIncomeUsd();
+        $model->pin = (string) $entity->pin();
+        $model->contact_email = (string) $entity->email();
+        $model->contact_phone = (string) $entity->phone();
 
         return $model;
+    }
+
+    public static function toNewModel(Client $entity): ClientModel
+    {
+        return self::toExistingModel($entity, new ClientModel);
     }
 
     public static function toEntity(ClientModel $model): Client
@@ -34,14 +39,14 @@ final class ClientMapper
         return new Client(
             id: $model->id,
             pin: new PersonalIdentificationNumber($model->pin),
-            full_name: $model->full_name,
-            birth_date: $model->birth_date,
-            region: $model->location_region,
+            fullName: $model->full_name,
+            birthDate: $model->birth_date,
+            region: Region::from($model->location_region),
             city: $model->location_city,
             phone: new PhoneNumber($model->contact_phone),
             email: new EmailAddress($model->contact_email),
-            credit_score: $model->credit_score,
-            monthly_income_usd: $model->monthly_income_usd,
+            creditScore: $model->credit_score,
+            monthlyIncomeUsd: $model->monthly_income_usd,
         );
     }
 }

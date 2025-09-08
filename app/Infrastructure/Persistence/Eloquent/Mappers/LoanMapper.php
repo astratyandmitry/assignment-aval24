@@ -9,18 +9,22 @@ use App\Infrastructure\Persistence\Eloquent\Models\LoanModel;
 
 final class LoanMapper
 {
-    public static function toModel(Loan $entity): LoanModel
+    public static function toExistingModel(Loan $entity, LoanModel $model): LoanModel
     {
-        $model = new LoanModel;
-        $model->id = $entity->getId();
-        $model->client_id = $entity->getClient()->getId();
-        $model->name = $entity->getName();
-        $model->amount_usd = $entity->getAmountUsd();
-        $model->period_days = $entity->getPeriodDays();
-        $model->interest_rate = $entity->getInterestRate();
-        $model->start_date = $entity->getStartDate();
-        $model->end_date = $entity->getEndDate();
+        $model->id = $entity->id();
+        $model->client_id = $entity->client()->id();
+        $model->name = $entity->name();
+        $model->amount_usd = $entity->amountUsd();
+        $model->period_days = $entity->periodDays();
+        $model->interest_rate = $entity->interestRate();
+        $model->start_date = $entity->startDate();
+        $model->end_date = $entity->endDate();
 
         return $model;
+    }
+
+    public static function toNewModel(Loan $entity): LoanModel
+    {
+        return self::toExistingModel($entity, new LoanModel);
     }
 }

@@ -16,26 +16,23 @@ test('it approve correct application', function (): void {
         'period_days' => fake()->numberBetween(30, 90),
     ];
 
-    $this->postJson('/api/v1/applications', $payload)
+    $this->postJson('/api/v1/loans/application', $payload)
         ->assertSuccessful()
         ->assertJsonStructure([
             'data' => [
-                'decision' => [
-                    'allowed',
-                    'reason',
-                    'interest_rate',
-                ],
-                'application' => [
-                    'amount_usd',
-                    'period_days',
-                ],
+                'clientId',
+                'allowed',
+                'denyReason',
+                'interestRate',
+                'amountUsd',
+                'periodDays',
             ],
         ])
-        ->assertJsonPath('data.application.amount_usd', $payload['amount_usd'])
-        ->assertJsonPath('data.application.period_days', $payload['period_days'])
-        ->assertJsonPath('data.decision.interest_rate', 0.10)
-        ->assertJsonPath('data.decision.reason', null)
-        ->assertJsonPath('data.decision.allowed', true);
+        ->assertJsonPath('data.amountUsd', $payload['amount_usd'])
+        ->assertJsonPath('data.periodDays', $payload['period_days'])
+        ->assertJsonPath('data.interestRate', 0.10)
+        ->assertJsonPath('data.denyReason', null)
+        ->assertJsonPath('data.allowed', true);
 })->group('applications');
 
 test('it increases interest rate for Ostrava application', function (): void {
@@ -49,10 +46,10 @@ test('it increases interest rate for Ostrava application', function (): void {
         'period_days' => fake()->numberBetween(30, 90),
     ];
 
-    $this->postJson('/api/v1/applications', $payload)
+    $this->postJson('/api/v1/loans/application', $payload)
         ->assertSuccessful()
-        ->assertJsonPath('data.decision.interest_rate', 0.15)
-        ->assertJsonPath('data.decision.allowed', true);
+        ->assertJsonPath('data.interestRate', 0.15)
+        ->assertJsonPath('data.allowed', true);
 })->group('applications');
 
 dataset('bad fields', [
@@ -72,7 +69,7 @@ test('it decline application with bad :field', function (string $key, mixed $val
         'period_days' => fake()->numberBetween(30, 90),
     ];
 
-    $this->postJson('/api/v1/applications', $payload)
+    $this->postJson('/api/v1/loans/application', $payload)
         ->assertSuccessful()
-        ->assertJsonPath('data.decision.allowed', false);
+        ->assertJsonPath('data.allowed', false);
 })->with('bad fields')->group('applications');

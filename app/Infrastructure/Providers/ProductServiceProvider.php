@@ -6,13 +6,14 @@ namespace App\Infrastructure\Providers;
 
 use App\Domain\Client\Enums\Region;
 use App\Domain\Loan\Policy\LoanEligibilityPolicy;
-use App\Domain\Loan\Rules\AgeRangeRule;
-use App\Domain\Loan\Rules\MinimumCreditScoreRule;
-use App\Domain\Loan\Rules\MinimumMonthlyIncomeRule;
-use App\Domain\Loan\Rules\PeriodDaysRangeRule;
-use App\Domain\Loan\Rules\RegionAllowedRule;
-use App\Domain\Loan\Rules\RegionIncreaseInterestRateRule;
-use App\Domain\Loan\Rules\RegionRandomDeclineRule;
+use App\Domain\Loan\Policy\Rules\AgeRangeRule;
+use App\Domain\Loan\Policy\Rules\MinimumCreditScoreRule;
+use App\Domain\Loan\Policy\Rules\MinimumMonthlyIncomeRule;
+use App\Domain\Loan\Policy\Rules\PeriodDaysRangeRule;
+use App\Domain\Loan\Policy\Rules\RegionAllowedRule;
+use App\Domain\Loan\Policy\Rules\RegionIncreaseInterestRateRule;
+use App\Domain\Loan\Policy\Rules\RegionRandomDeclineRule;
+use App\Domain\Loan\ValueObjects\InterestRate;
 use Carbon\Laravel\ServiceProvider;
 
 final class ProductServiceProvider extends ServiceProvider
@@ -21,8 +22,8 @@ final class ProductServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             LoanEligibilityPolicy::class,
-            fn(): LoanEligibilityPolicy => new LoanEligibilityPolicy(
-                base_interest_rate: 0.10,
+            fn (): LoanEligibilityPolicy => new LoanEligibilityPolicy(
+                baseInterestRate: new InterestRate(0.10),
                 rules: [
                     new AgeRangeRule(min: 18, max: 60),
                     new MinimumMonthlyIncomeRule(min: 1000),

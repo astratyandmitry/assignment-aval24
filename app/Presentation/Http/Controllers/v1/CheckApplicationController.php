@@ -6,17 +6,13 @@ namespace App\Presentation\Http\Controllers\v1;
 
 use App\Application\DTO\CheckApplicationCommand;
 use App\Application\UseCases\CheckApplicationHandler;
-use App\Application\UseCases\LoanIssueHandler;
 use App\Presentation\Http\Controllers\BaseController;
 use App\Presentation\Http\Requests\v1\LoanApplicationRequest;
 use Illuminate\Http\JsonResponse;
 
-final readonly class LoanIssueController extends BaseController
+final readonly class CheckApplicationController extends BaseController
 {
-    public function __construct(
-        private CheckApplicationHandler $checkApplicationHandler,
-        private LoanIssueHandler $issueLoanHandler,
-    ) {}
+    public function __construct(private CheckApplicationHandler $handler) {}
 
     public function __invoke(LoanApplicationRequest $request): JsonResponse
     {
@@ -26,10 +22,8 @@ final readonly class LoanIssueController extends BaseController
             periodDays: $request->period_days,
         );
 
-        $loanApplicationResult = $this->checkApplicationHandler->execute($cmd);
+        $loanApplicationResult = $this->handler->execute($cmd);
 
-        $loan = $this->issueLoanHandler->execute($loanApplicationResult);
-
-        return new JsonResponse(['data' => $loan]);
+        return new JsonResponse(['data' => $loanApplicationResult]);
     }
 }

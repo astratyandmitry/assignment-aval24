@@ -15,67 +15,67 @@ final readonly class Client
     public function __construct(
         private string $id,
         private PersonalIdentificationNumber $pin,
-        private string $full_name,
-        private Carbon $birth_date,
+        private string $fullName,
+        private Carbon $birthDate,
         private Region $region,
         private string $city,
         private PhoneNumber $phone,
         private EmailAddress $email,
-        private int $credit_score,
-        private float $monthly_income_usd,
+        private int $creditScore,
+        private float $monthlyIncomeUsd,
     ) {}
 
-    public function getId(): string
+    public function id(): string
     {
         return $this->id;
     }
 
-    public function getFullName(): string
+    public function fullName(): string
     {
-        return $this->full_name;
+        return $this->fullName;
     }
 
-    public function getBirthDate(): Carbon
+    public function birthDate(): Carbon
     {
-        return $this->birth_date;
+        return $this->birthDate;
     }
 
-    public function getAge(): int
+    public function age(): int
     {
-        return $this->birth_date->age;
+        return $this->birthDate->age;
     }
 
-    public function getRegion(): Region
+    public function region(): Region
     {
         return $this->region;
     }
 
-    public function getCity(): string
+    public function city(): string
     {
         return $this->city;
     }
 
-    public function getCreditScore(): int
+    public function creditScore(): int
     {
-        return $this->credit_score;
+        return $this->creditScore;
     }
 
-    public function getMonthlyIncomeusd(): float
+    public function monthlyIncomeUsd(): float
     {
-        return $this->monthly_income_usd;
+        return $this->monthlyIncomeUsd;
     }
 
-    public function getPin(): PersonalIdentificationNumber
+    public function pin(): PersonalIdentificationNumber
     {
         return $this->pin;
     }
 
-    public function getEmail(): EmailAddress
+    public function email(): EmailAddress
     {
         return $this->email;
     }
 
-    public function getPhone(): PhoneNumber
+    public function phone(): PhoneNumber
     {
         return $this->phone;
     }

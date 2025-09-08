@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\DTO;
 
-final readonly class CreateClientDTO
+final readonly class CreateClientCommand
 {
     public function __construct(
         public string $pin,

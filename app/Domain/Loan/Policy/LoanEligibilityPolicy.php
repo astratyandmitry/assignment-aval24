@@ -4,35 +4,36 @@ declare(strict_types=1);
 
 namespace App\Domain\Loan\Policy;
 
-use App\Domain\Loan\Decision\Decision;
 use App\Domain\Loan\Entities\Application;
+use App\Domain\Loan\ValueObjects\Decision;
+use App\Domain\Loan\ValueObjects\InterestRate;
 
 final readonly class LoanEligibilityPolicy
 {
     /**
-     * @param  array<\App\Domain\Loan\Rules\Rule>  $rules
+     * @param  array<\App\Domain\Loan\Policy\Rules\Rule>  $rules
      */
-    public function __construct(public float $base_interest_rate, private array $rules) {}
+    public function __construct(
+        public InterestRate $baseInterestRate,
+        private array $rules,
+    ) {}
 
     public function decide(Application $application): Decision
     {
-        $interestRate = $this->base_interest_rate;
-        $decision = Decision::allow();
+        $rate = $this->baseInterestRate;
 
         foreach ($this->rules as $rule) {
-            $decision = $rule->evaluate($application);
+            $effect = $rule->evaluate($application);
 
-            if (! $decision->allowed) {
-                return $decision;
+            if ($effect->isDenied()) {
+                return Decision::denied($effect->denyReason());
             }
 
-            if ($decision->interestRateUpdater) {
-                $interestRate = ($decision->interestRateUpdater)($interestRate);
+            if ($effect->rateDelta()) {
+                $rate = $rate->applyDelta($effect->rateDelta());
             }
         }
 
-        $decision->setInterestRate($interestRate);
-
-        return $decision;
+        return Decision::allowed($rate);
     }
 }

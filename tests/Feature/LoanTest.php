@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Domain\Client\Enums\Region;
 use App\Infrastructure\Persistence\Eloquent\Models\ClientModel;
 
-test('it issue a loan', function(): void {
+test('it issue a loan', function (): void {
     $client = ClientModel::factory()->correct()->create([
         'location_region' => Region::BR,
     ]);
@@ -16,22 +16,22 @@ test('it issue a loan', function(): void {
         'period_days' => fake()->numberBetween(30, 90),
     ];
 
-    $this->postJson('/api/v1/loans', $payload)
+    $this->postJson('/api/v1/loans/issue', $payload)
         ->assertSuccessful()
         ->assertJsonStructure([
             'data' => [
                 'id',
                 'name',
-                'amount_usd',
-                'interest_rate',
-                'period_days',
-                'period' => ['start', 'end'],
-                'client',
+                'amountUsd',
+                'interestRate',
+                'periodDays',
+                'startDate',
+                'endDate',
             ],
         ])
-        ->assertJsonPath('data.interest_rate', 0.10)
-        ->assertJsonPath('data.period.start', now()->format('Y-m-d'))
-        ->assertJsonPath('data.period.end', now()->addDays($payload['period_days'])->format('Y-m-d'));
+        ->assertJsonPath('data.interestRate', 0.10)
+        ->assertJsonPath('data.startDate', now()->format('Y-m-d'))
+        ->assertJsonPath('data.endDate', now()->addDays($payload['period_days'])->format('Y-m-d'));
 
     $this->assertDatabaseHas('loans', [
         'client_id' => $payload['client_id'],

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Presentation\Http\Requests\v1;
 
-use App\Application\DTO\ApplicationCheckDTO;
 use App\Presentation\Http\Requests\BaseRequest;
 
 /**
@@ -17,18 +16,9 @@ final class LoanApplicationRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'client_id' => ['required', 'uuid', 'exists:clients,id'],
+            'client_id' => ['required', 'uuid'],
             'amount_usd' => ['required', 'numeric', 'min:1'],
-            'period_days' => ['required', 'integer'],
+            'period_days' => ['required', 'integer', 'min:1'],
         ];
-    }
-
-    public function dto(): ApplicationCheckDTO
-    {
-        return new ApplicationCheckDTO(
-            clientId: $this->client_id,
-            amountUsd: $this->amount_usd,
-            periodDays: $this->period_days,
-        );
     }
 }

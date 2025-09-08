@@ -34,14 +34,14 @@ test('it can create a client', function (): void {
             'data' => [
                 'id',
                 'pin',
-                'full_name',
-                'birth_date',
+                'fullName',
+                'birthDate',
                 'region',
                 'city',
                 'phone',
                 'email',
-                'credit_score',
-                'monthly_income_usd',
+                'creditScore',
+                'monthlyIncomeUsd',
             ],
         ])
         ->assertJsonPath('data.pin', $payload['pin'])

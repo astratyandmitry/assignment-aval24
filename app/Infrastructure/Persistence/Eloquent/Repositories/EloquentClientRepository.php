@@ -23,7 +23,7 @@ final class EloquentClientRepository implements ClientRepository
 
     public function create(Client $client): Client
     {
-        ClientMapper::toModel($client)->save();
+        ClientMapper::toNewModel($client)->save();
 
         return $client;
     }
