@@ -16,13 +16,13 @@ final class ApplicationResource extends BaseResource
     {
         return [
             'decision' => [
-                'allowed' => $this->decision()->allowed,
-                'reason' => $this->decision()->denyReason,
-                'interest_rate' => $this->decision()->getInterestRate(),
+                'allowed' => $this->getDecision()->allowed,
+                'reason' => $this->getDecision()->deny_reason,
+                'interest_rate' => $this->getDecision()->getInterestRate(),
             ],
             'application' => [
-                'amount_usd' => $this->application()->amount_usd(),
-                'period_days' => $this->application()->period_days(),
+                'amount_usd' => $this->getApplication()->getAmountUsd(),
+                'period_days' => $this->getApplication()->getPeriodDays(),
             ],
         ];
     }

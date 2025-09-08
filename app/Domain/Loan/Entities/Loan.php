@@ -13,50 +13,50 @@ final readonly class Loan
         private string $id,
         private Client $client,
         private string $name,
-        private float $amountUsd,
-        private int $periodDays,
-        private float $interestRate,
-        private Carbon $startDate,
-        private Carbon $endDate,
+        private float $amount_usd,
+        private int $period_days,
+        private float $interest_rate,
+        private Carbon $start_date,
+        private Carbon $end_date,
     ) {}
 
-    public function id(): string
+    public function getId(): string
     {
         return $this->id;
     }
 
-    public function client(): Client
+    public function getClient(): Client
     {
         return $this->client;
     }
 
-    public function name(): string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function amount_usd(): float
+    public function getAmountUsd(): float
     {
-        return $this->amountUsd;
+        return $this->amount_usd;
     }
 
-    public function period_days(): int
+    public function getPeriodDays(): int
     {
-        return $this->periodDays;
+        return $this->period_days;
     }
 
-    public function interest_rate(): float
+    public function getInterestRate(): float
     {
-        return $this->interestRate;
+        return $this->interest_rate;
     }
 
-    public function start_date(): Carbon
+    public function getStartDate(): Carbon
     {
-        return $this->startDate;
+        return $this->start_date;
     }
 
-    public function end_date(): Carbon
+    public function getEndDate(): Carbon
     {
-        return $this->endDate;
+        return $this->end_date;
     }
 }

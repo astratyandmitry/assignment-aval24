@@ -15,16 +15,16 @@ final class ClientResource extends BaseResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id(),
-            'pin' => (string) $this->pin(),
-            'full_name' => $this->full_name(),
-            'birth_date' => $this->birth_date()->format('Y-m-d'),
-            'region' => $this->region()->value,
-            'city' => $this->city(),
-            'phone' => (string) $this->phone(),
-            'email' => (string) $this->email(),
-            'credit_score' => $this->credit_score(),
-            'monthly_income_usd' => $this->monthly_income_usd(),
+            'id' => $this->getId(),
+            'pin' => (string) $this->getPin(),
+            'full_name' => $this->getFullName(),
+            'birth_date' => $this->getBirthDate()->format('Y-m-d'),
+            'region' => $this->getRegion()->value,
+            'city' => $this->getCity(),
+            'phone' => (string) $this->getPhone(),
+            'email' => (string) $this->getEmail(),
+            'credit_score' => $this->getCreditScore(),
+            'monthly_income_usd' => $this->getMonthlyIncomeusd(),
         ];
     }
 }

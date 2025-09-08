@@ -13,12 +13,12 @@ final readonly class ApplicationDecision
         private Decision $decision,
     ) {}
 
-    public function application(): Application
+    public function getApplication(): Application
     {
         return $this->application;
     }
 
-    public function decision(): Decision
+    public function getDecision(): Decision
     {
         return $this->decision;
     }

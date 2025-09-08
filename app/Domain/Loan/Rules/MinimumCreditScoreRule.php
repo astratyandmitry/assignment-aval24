@@ -13,7 +13,7 @@ final readonly class MinimumCreditScoreRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        return $application->client()->credit_score() > $this->min
+        return $application->getClient()->getCreditScore() > $this->min
             ? Decision::allow()
             : Decision::deny("Credit Score is less than {$this->min}");
     }

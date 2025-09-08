@@ -13,7 +13,7 @@ final readonly class MinimumMonthlyIncomeRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        return $application->client()->monthly_income_usd() >= $this->min
+        return $application->getClient()->getMonthlyIncomeusd() >= $this->min
             ? Decision::allow()
             : Decision::deny("Monthly income is less than {$this->min}");
     }

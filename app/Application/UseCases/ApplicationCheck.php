@@ -27,8 +27,8 @@ final readonly class ApplicationCheck
 
         $application = new Application(
             client: $client,
-            amountUsd: $dto->amountUsd,
-            periodDays: $dto->periodDays,
+            amount_usd: $dto->amountUsd,
+            period_days: $dto->periodDays,
         );
 
         $decision = $this->policy->decide($application);

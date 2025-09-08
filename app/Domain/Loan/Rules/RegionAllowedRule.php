@@ -16,7 +16,7 @@ final readonly class RegionAllowedRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        return in_array($application->client()->region(), $this->regions)
+        return in_array($application->getClient()->getRegion(), $this->regions)
             ? Decision::allow()
             : Decision::deny('Region is not allowed list');
     }

@@ -15,16 +15,16 @@ final class LoanResource extends BaseResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id(),
-            'name' => $this->name(),
-            'amount_usd' => $this->amount_usd(),
-            'interest_rate' => $this->interest_rate(),
-            'period_days' => $this->period_days(),
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'amount_usd' => $this->getAmountUsd(),
+            'interest_rate' => $this->getInterestRate(),
+            'period_days' => $this->getPeriodDays(),
             'period' => [
-                'start' => $this->start_date()->format('Y-m-d'),
-                'end' => $this->end_date()->format('Y-m-d'),
+                'start' => $this->getStartDate()->format('Y-m-d'),
+                'end' => $this->getEndDate()->format('Y-m-d'),
             ],
-            'client' => new ClientResource($this->client()),
+            'client' => new ClientResource($this->getClient()),
         ];
     }
 }

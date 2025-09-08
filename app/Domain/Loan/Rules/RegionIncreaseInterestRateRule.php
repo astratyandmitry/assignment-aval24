@@ -14,7 +14,7 @@ final readonly class RegionIncreaseInterestRateRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        if ($application->client()->region() === $this->region) {
+        if ($application->getClient()->getRegion() === $this->region) {
             return Decision::allow()
                 ->registerInterestRateUpdater(fn (float $rate): float => $rate + $this->increasePercentage);
         }

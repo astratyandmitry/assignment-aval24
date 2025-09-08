@@ -14,7 +14,7 @@ final readonly class RegionRandomDeclineRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        if ($application->client()->region() !== $this->region) {
+        if ($application->getClient()->getRegion() !== $this->region) {
             return Decision::allow();
         }
 

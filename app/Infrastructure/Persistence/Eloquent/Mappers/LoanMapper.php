@@ -12,14 +12,14 @@ final class LoanMapper
     public static function toModel(Loan $entity): LoanModel
     {
         $model = new LoanModel;
-        $model->id = $entity->id();
-        $model->client_id = $entity->client()->id();
-        $model->name = $entity->name();
-        $model->amount_usd = $entity->amount_usd();
-        $model->period_days = $entity->period_days();
-        $model->interest_rate = $entity->interest_rate();
-        $model->start_date = $entity->start_date();
-        $model->end_date = $entity->end_date();
+        $model->id = $entity->getId();
+        $model->client_id = $entity->getClient()->getId();
+        $model->name = $entity->getName();
+        $model->amount_usd = $entity->getAmountUsd();
+        $model->period_days = $entity->getPeriodDays();
+        $model->interest_rate = $entity->getInterestRate();
+        $model->start_date = $entity->getStartDate();
+        $model->end_date = $entity->getEndDate();
 
         return $model;
     }

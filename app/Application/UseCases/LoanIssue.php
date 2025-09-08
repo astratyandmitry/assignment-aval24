@@ -16,23 +16,27 @@ final readonly class LoanIssue
     public function __construct(
         private LoanRepository $repository,
         private IdGenerator $idGenerator,
-    ) {}
+    ) {
+    }
 
     public function execute(ApplicationDecision $applicationDecision): Loan
     {
-        if (! $applicationDecision->decision()->allowed) {
-            throw new LoanPolicyException($applicationDecision->decision()->denyReason);
+        $decision = $applicationDecision->getDecision();
+        $application = $applicationDecision->getApplication();
+
+        if (! $decision->allowed) {
+            throw new LoanPolicyException($decision->deny_reason);
         }
 
         $loan = new Loan(
             id: $this->idGenerator->generate(),
-            client: $applicationDecision->application()->client(),
+            client: $application->getClient(),
             name: 'Personal Credit',
-            amountUsd: $applicationDecision->application()->amount_usd(),
-            periodDays: $applicationDecision->application()->period_days(),
-            interestRate: $applicationDecision->decision()->getInterestRate(),
-            startDate: Carbon::today(),
-            endDate: Carbon::today()->addDays($applicationDecision->application()->period_days())
+            amount_usd: $application->getAmountUsd(),
+            period_days: $application->getPeriodDays(),
+            interest_rate: $decision->getInterestRate(),
+            start_date: Carbon::today(),
+            end_date: Carbon::today()->addDays($application->getPeriodDays())
         );
 
         return $this->repository->create($loan);

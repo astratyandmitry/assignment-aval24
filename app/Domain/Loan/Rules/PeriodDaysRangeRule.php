@@ -13,7 +13,7 @@ final readonly class PeriodDaysRangeRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        $periodDays = $application->period_days();
+        $periodDays = $application->getPeriodDays();
 
         return ($periodDays >= $this->min && $periodDays <= $this->max)
             ? Decision::allow()

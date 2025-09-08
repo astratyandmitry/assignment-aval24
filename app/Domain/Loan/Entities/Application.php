@@ -10,22 +10,22 @@ final readonly class Application
 {
     public function __construct(
         private Client $client,
-        private float $amountUsd,
-        private int $periodDays,
+        private float $amount_usd,
+        private int $period_days,
     ) {}
 
-    public function client(): Client
+    public function getClient(): Client
     {
         return $this->client;
     }
 
-    public function amount_usd(): float
+    public function getAmountUsd(): float
     {
-        return $this->amountUsd;
+        return $this->amount_usd;
     }
 
-    public function period_days(): int
+    public function getPeriodDays(): int
     {
-        return $this->periodDays;
+        return $this->period_days;
     }
 }

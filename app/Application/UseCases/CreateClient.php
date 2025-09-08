@@ -27,14 +27,14 @@ final readonly class CreateClient
         $client = new Client(
             id: $this->idGenerator->generate(),
             pin: new PersonalIdentificationNumber($dto->pin),
-            fullName: $dto->fullName,
-            birthDate: Carbon::make($dto->birthDate),
+            full_name: $dto->fullName,
+            birth_date: Carbon::make($dto->birthDate),
             region: Region::from($dto->region),
             city: $dto->city,
             phone: new PhoneNumber($dto->phone),
             email: new EmailAddress($dto->email),
-            creditScore: $dto->creditScore,
-            monthlyIncomeUsd: $dto->monthlyIncomeUsd,
+            credit_score: $dto->creditScore,
+            monthly_income_usd: $dto->monthlyIncomeUsd,
         );
 
         $this->ensureClientDoesntExists($client);
@@ -44,15 +44,15 @@ final readonly class CreateClient
 
     private function ensureClientDoesntExists(Client $client): void
     {
-        if ($this->repository->existsByPin($client->pin())) {
+        if ($this->repository->existsByPin($client->getPin())) {
             throw new ClientAlreadyExistsException('Client PIN is already taken.');
         }
 
-        if ($this->repository->existsByPhone($client->phone())) {
+        if ($this->repository->existsByPhone($client->getPhone())) {
             throw new ClientAlreadyExistsException('Client Phone number is already taken.');
         }
 
-        if ($this->repository->existsByEmail($client->email())) {
+        if ($this->repository->existsByEmail($client->getEmail())) {
             throw new ClientAlreadyExistsException('Client Email address is already taken.');
         }
     }

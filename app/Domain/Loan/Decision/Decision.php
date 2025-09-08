@@ -10,11 +10,11 @@ final class Decision
 {
     public ?Closure $interestRateUpdater = null;
 
-    private ?float $interestRate = 0;
+    private ?float $interest_rate = 0;
 
     public function __construct(
         public readonly bool $allowed,
-        public readonly ?string $denyReason,
+        public readonly ?string $deny_reason,
     ) {}
 
     public static function allow(): self
@@ -34,13 +34,13 @@ final class Decision
         return $this;
     }
 
-    public function setInterestRate(float $interestRate): void
+    public function setInterestRate(float $interest_rate): void
     {
-        $this->interestRate = round($interestRate, 2);
+        $this->interest_rate = round($interest_rate, 2);
     }
 
     public function getInterestRate(): float
     {
-        return $this->interestRate;
+        return $this->interest_rate;
     }
 }

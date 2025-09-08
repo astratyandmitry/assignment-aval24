@@ -22,7 +22,7 @@ final class ProductServiceProvider extends ServiceProvider
         $this->app->bind(
             LoanEligibilityPolicy::class,
             fn(): LoanEligibilityPolicy => new LoanEligibilityPolicy(
-                baseInterestRate: 0.10,
+                base_interest_rate: 0.10,
                 rules: [
                     new AgeRangeRule(min: 18, max: 60),
                     new MinimumMonthlyIncomeRule(min: 1000),

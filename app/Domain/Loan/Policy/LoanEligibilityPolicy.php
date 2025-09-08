@@ -12,11 +12,11 @@ final readonly class LoanEligibilityPolicy
     /**
      * @param  array<\App\Domain\Loan\Rules\Rule>  $rules
      */
-    public function __construct(public float $baseInterestRate, private array $rules) {}
+    public function __construct(public float $base_interest_rate, private array $rules) {}
 
     public function decide(Application $application): Decision
     {
-        $interestRate = $this->baseInterestRate;
+        $interestRate = $this->base_interest_rate;
         $decision = Decision::allow();
 
         foreach ($this->rules as $rule) {

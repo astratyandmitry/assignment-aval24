@@ -13,7 +13,7 @@ final readonly class AgeRangeRule implements Rule
 
     public function evaluate(Application $application): Decision
     {
-        $age = $application->client()->birth_date()->age;
+        $age = $application->getClient()->getBirthDate()->age;
 
         return ($age >= $this->min && $age <= $this->max)
             ? Decision::allow()
