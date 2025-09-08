@@ -4,7 +4,7 @@ namespace App\Domain\Loan\Entities;
 
 use App\Domain\Client\Entities\Client;
 
-final readonly class LoanApplication
+final readonly class Application
 {
     public function __construct(
         protected Client $client,

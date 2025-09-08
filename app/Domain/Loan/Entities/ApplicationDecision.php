@@ -4,14 +4,14 @@ namespace App\Domain\Loan\Entities;
 
 use App\Domain\Loan\Decision\Decision;
 
-final readonly class LoanApplicationDecision
+final readonly class ApplicationDecision
 {
     public function __construct(
-        protected LoanApplication $application,
+        protected Application $application,
         protected Decision $decision,
     ) {}
 
-    public function application(): LoanApplication
+    public function application(): Application
     {
         return $this->application;
     }

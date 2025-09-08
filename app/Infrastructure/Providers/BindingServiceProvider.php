@@ -19,5 +19,10 @@ final class BindingServiceProvider extends ServiceProvider
             \App\Domain\Client\Repositories\ClientRepository::class,
             \App\Infrastructure\Persistence\Eloquent\Repositories\EloquentClientRepository::class,
         );
+
+        $this->app->bind(
+            \App\Domain\Loan\Repositories\LoanRepository::class,
+            \App\Infrastructure\Persistence\Eloquent\Repositories\EloquentLoanRepository::class,
+        );
     }
 }

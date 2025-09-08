@@ -15,16 +15,16 @@ final class ClientCreateController extends BaseController
 {
     public function __invoke(
         ClientCreateRequest $request,
-        CreateClient $useCase,
+        CreateClient $clientCreate,
     ): ClientResource|JsonResponse {
         try {
-            $client = $useCase->execute(
+            $client = $clientCreate->execute(
                 $request->dto()
             );
 
             return new ClientResource($client);
         } catch (Exception $e) {
-            return $this->handle_exception($e);
+            return $this->handleExceptionResponse($e);
         }
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Infrastructure\Persistence\Eloquent\Mappers;
 
 use App\Domain\Client\Entities\Client;
-use App\Domain\Client\Entities\Client as Entity;
 use App\Domain\Client\ValueObjects\EmailAddress;
 use App\Domain\Client\ValueObjects\PersonalIdentificationNumber;
 use App\Domain\Client\ValueObjects\PhoneNumber;
@@ -11,7 +10,7 @@ use App\Infrastructure\Persistence\Eloquent\Models\ClientModel;
 
 final class ClientMapper
 {
-    public static function toModel(Entity $entity): ClientModel
+    public static function toModel(Client $entity): ClientModel
     {
         $model = new ClientModel;
         $model->id = $entity->id();

@@ -12,7 +12,7 @@ use App\Presentation\Http\Requests\BaseRequest;
  * @property-read float $amount_usd
  * @property-read int $period_days
  */
-final class ApplicationCheckRequest extends BaseRequest
+final class LoanApplicationRequest extends BaseRequest
 {
     public function rules(): array
     {

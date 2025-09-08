@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('loans', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignUlid('client_id')->constrained();
-            $table->string('status', 20)->index();
+            $table->uuid('id')->primary();
+            $table->foreignUuid('client_id')->constrained('clients', 'id');
             $table->string('name', 120);
             $table->float('amount_usd');
+            $table->unsignedInteger('period_days');
             $table->float('interest_rate');
             $table->date('start_date');
             $table->date('end_date');

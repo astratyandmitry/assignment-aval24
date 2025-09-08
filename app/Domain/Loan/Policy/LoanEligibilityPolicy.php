@@ -3,7 +3,7 @@
 namespace App\Domain\Loan\Policy;
 
 use App\Domain\Loan\Decision\Decision;
-use App\Domain\Loan\Entities\LoanApplication;
+use App\Domain\Loan\Entities\Application;
 
 final readonly class LoanEligibilityPolicy
 {
@@ -12,7 +12,7 @@ final readonly class LoanEligibilityPolicy
      */
     public function __construct(public float $baseInterestRate, private array $rules) {}
 
-    public function decide(LoanApplication $application): Decision
+    public function decide(Application $application): Decision
     {
         $interestRate = $this->baseInterestRate;
         $decision = Decision::allow();

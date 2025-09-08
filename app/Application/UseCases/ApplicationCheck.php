@@ -5,8 +5,8 @@ namespace App\Application\UseCases;
 use App\Application\DTO\ApplicationCheckDTO;
 use App\Domain\Client\Exceptions\ClientNotFoundException;
 use App\Domain\Client\Repositories\ClientRepository;
-use App\Domain\Loan\Entities\LoanApplication;
-use App\Domain\Loan\Entities\LoanApplicationDecision;
+use App\Domain\Loan\Entities\Application;
+use App\Domain\Loan\Entities\ApplicationDecision;
 use App\Domain\Loan\Policy\LoanEligibilityPolicy;
 
 final readonly class ApplicationCheck
@@ -16,13 +16,13 @@ final readonly class ApplicationCheck
         private LoanEligibilityPolicy $policy,
     ) {}
 
-    public function execute(ApplicationCheckDTO $dto): LoanApplicationDecision
+    public function execute(ApplicationCheckDTO $dto): ApplicationDecision
     {
         if (! $client = $this->clientRepository->findById($dto->clientId)) {
             throw new ClientNotFoundException('Client not found by given ID');
         }
 
-        $application = new LoanApplication(
+        $application = new Application(
             client: $client,
             amountUsd: $dto->amountUsd,
             periodDays: $dto->periodDays,
@@ -30,7 +30,7 @@ final readonly class ApplicationCheck
 
         $decision = $this->policy->decide($application);
 
-        return new LoanApplicationDecision(
+        return new ApplicationDecision(
             application: $application,
             decision: $decision,
         );

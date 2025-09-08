@@ -3,7 +3,6 @@
 namespace App\Infrastructure\Persistence\Eloquent\Repositories;
 
 use App\Domain\Client\Entities\Client;
-use App\Domain\Client\Entities\Client as Entity;
 use App\Domain\Client\Repositories\ClientRepository;
 use App\Domain\Client\ValueObjects\EmailAddress;
 use App\Domain\Client\ValueObjects\PersonalIdentificationNumber;
@@ -20,7 +19,7 @@ final class EloquentClientRepository implements ClientRepository
         return $model ? ClientMapper::toEntity($model) : null;
     }
 
-    public function create(Entity $client): Client
+    public function create(Client $client): Client
     {
         ClientMapper::toModel($client)->save();
 

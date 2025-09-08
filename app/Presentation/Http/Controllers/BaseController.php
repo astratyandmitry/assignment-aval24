@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response as Status;
 
 abstract class BaseController
 {
-    protected function handle_exception(Exception $e): JsonResponse
+    protected function handleExceptionResponse(Exception $e): JsonResponse
     {
         return response()->json([
             'error' => $e->getMessage(),

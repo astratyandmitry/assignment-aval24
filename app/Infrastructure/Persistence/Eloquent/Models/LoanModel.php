@@ -3,10 +3,10 @@
 namespace App\Infrastructure\Persistence\Eloquent\Models;
 
 /**
- * @property int $client_id
- * @property string $status
+ * @property string $client_id
  * @property string $name
  * @property float $amount_usd
+ * @property int $period_days
  * @property float $interest_rate
  * @property \Carbon\Carbon $start_date
  * @property \Carbon\Carbon $end_date
@@ -19,8 +19,6 @@ final class LoanModel extends BaseModel
     protected function casts(): array
     {
         return [
-            'client_id' => 'integer',
-            'status' => 'enum', // todo
             'amount_usd' => 'float',
             'interest_rate' => 'float',
             'start_date' => 'date',

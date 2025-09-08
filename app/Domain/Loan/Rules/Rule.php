@@ -3,9 +3,9 @@
 namespace App\Domain\Loan\Rules;
 
 use App\Domain\Loan\Decision\Decision;
-use App\Domain\Loan\Entities\LoanApplication;
+use App\Domain\Loan\Entities\Application;
 
 interface Rule
 {
-    public function evaluate(LoanApplication $application): Decision;
+    public function evaluate(Application $application): Decision;
 }

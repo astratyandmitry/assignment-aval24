@@ -3,7 +3,7 @@
 namespace App\Domain\Loan\Rules;
 
 use App\Domain\Loan\Decision\Decision;
-use App\Domain\Loan\Entities\LoanApplication;
+use App\Domain\Loan\Entities\Application;
 
 final readonly class RegionAllowedRule implements Rule
 {
@@ -12,7 +12,7 @@ final readonly class RegionAllowedRule implements Rule
      */
     public function __construct(private array $regions) {}
 
-    public function evaluate(LoanApplication $application): Decision
+    public function evaluate(Application $application): Decision
     {
         return in_array($application->client()->region(), $this->regions)
             ? Decision::allow()

@@ -8,7 +8,7 @@ use App\Presentation\Http\Resources\BaseResource;
 use Illuminate\Http\Request;
 
 /**
- * @mixin \App\Domain\Loan\Entities\LoanApplicationDecision
+ * @mixin \App\Domain\Loan\Entities\ApplicationDecision
  */
 final class ApplicationResource extends BaseResource
 {
