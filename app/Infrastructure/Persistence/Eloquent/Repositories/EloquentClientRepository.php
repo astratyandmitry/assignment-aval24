@@ -13,6 +13,13 @@ use App\Infrastructure\Persistence\Eloquent\Models\ClientModel;
 
 final class EloquentClientRepository implements ClientRepository
 {
+    public function findById(string $id): ?Client
+    {
+        $model = ClientModel::query()->find($id);
+
+        return $model ? ClientMapper::toEntity($model) : null;
+    }
+
     public function create(Entity $client): Client
     {
         ClientMapper::toModel($client)->save();

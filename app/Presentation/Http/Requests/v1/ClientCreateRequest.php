@@ -37,11 +37,11 @@ final class ClientCreateRequest extends BaseRequest
         ];
     }
 
-    public function toDTO(): CreateClientDTO
+    public function dto(): CreateClientDTO
     {
         return new CreateClientDTO(
             pin: $this->pin,
-            full_name: $this->full_name,
+            fullName: $this->full_name,
             birthDate: $this->birth_date,
             region: $this->region,
             city: $this->city,

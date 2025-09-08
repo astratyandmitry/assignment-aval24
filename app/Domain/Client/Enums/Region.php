@@ -6,5 +6,5 @@ enum Region: string
 {
     case PR = 'Prague';
     case BR = 'Brno';
-    case OS = 'Ostrova';
+    case OS = 'Ostrava';
 }

@@ -2,6 +2,4 @@
 
 namespace App\Domain\Client\Exceptions;
 
-final class ClientAlreadyExistsException extends \DomainException
-{
-}
+final class ClientAlreadyExistsException extends \DomainException {}

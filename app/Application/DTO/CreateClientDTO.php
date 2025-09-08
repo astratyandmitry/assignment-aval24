@@ -6,7 +6,7 @@ final readonly class CreateClientDTO
 {
     public function __construct(
         public string $pin,
-        public string $full_name,
+        public string $fullName,
         public string $birthDate,
         public string $region,
         public string $city,

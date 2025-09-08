@@ -18,15 +18,14 @@ final readonly class CreateClient
     public function __construct(
         private ClientRepository $repository,
         private IdGenerator $idGenerator,
-    ) {
-    }
+    ) {}
 
     public function execute(CreateClientDTO $dto): Client
     {
         $client = new Client(
             id: $this->idGenerator->generate(),
             pin: new PersonalIdentificationNumber($dto->pin),
-            fullName: $dto->full_name,
+            fullName: $dto->fullName,
             birthDate: Carbon::make($dto->birthDate),
             region: Region::from($dto->region),
             city: $dto->city,

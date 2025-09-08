@@ -2,6 +2,4 @@
 
 namespace App\Domain\Client\Exceptions;
 
-final class ClientTooYoungException extends \DomainException
-{
-}
+final class ClientTooYoungException extends \DomainException {}

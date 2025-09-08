@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Domain\Loan\Rules;
+
+use App\Domain\Client\Enums\Region;
+use App\Domain\Loan\Decision\Decision;
+use App\Domain\Loan\Entities\LoanApplication;
+
+final readonly class RegionIncreaseInterestRateRule implements Rule
+{
+    public function __construct(private Region $region, private float $increasePercentage) {}
+
+    public function evaluate(LoanApplication $application): Decision
+    {
+        if ($application->client()->region() === $this->region) {
+            return Decision::allow()
+                ->registerInterestRateUpdater(fn (float $rate) => $rate + $this->increasePercentage);
+        }
+
+        return Decision::allow();
+    }
+}

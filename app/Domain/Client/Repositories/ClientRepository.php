@@ -9,6 +9,8 @@ use App\Domain\Client\ValueObjects\PhoneNumber;
 
 interface ClientRepository
 {
+    public function findById(string $id): ?Client;
+
     public function create(Client $client): Client;
 
     public function existsByPin(PersonalIdentificationNumber $pin): bool;

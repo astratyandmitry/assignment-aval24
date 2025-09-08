@@ -3,7 +3,6 @@
 namespace App\Domain\Client\Entities;
 
 use App\Domain\Client\Enums\Region;
-use App\Domain\Client\Exceptions\ClientTooYoungException;
 use App\Domain\Client\ValueObjects\EmailAddress;
 use App\Domain\Client\ValueObjects\PersonalIdentificationNumber;
 use App\Domain\Client\ValueObjects\PhoneNumber;
@@ -22,11 +21,7 @@ final readonly class Client
         protected EmailAddress $email,
         protected int $creditScore,
         protected float $monthlyIncomeUsd,
-    ) {
-        if ($this->birthDate->age < 18) {
-            throw new ClientTooYoungException('Client must be at least 18 years old');
-        }
-    }
+    ) {}
 
     public function id(): string
     {
