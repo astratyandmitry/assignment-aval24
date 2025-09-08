@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Rules;
 
 use App\Domain\Client\Enums\Region;
@@ -14,7 +16,7 @@ final readonly class RegionIncreaseInterestRateRule implements Rule
     {
         if ($application->client()->region() === $this->region) {
             return Decision::allow()
-                ->registerInterestRateUpdater(fn (float $rate) => $rate + $this->increasePercentage);
+                ->registerInterestRateUpdater(fn (float $rate): float => $rate + $this->increasePercentage);
         }
 
         return Decision::allow();

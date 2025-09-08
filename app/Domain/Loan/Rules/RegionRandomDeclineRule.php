@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Rules;
 
 use App\Domain\Client\Enums\Region;
@@ -16,7 +18,7 @@ final readonly class RegionRandomDeclineRule implements Rule
             return Decision::allow();
         }
 
-        return rand(0, 1) === 0
+        return random_int(0, 1) === 0
             ? Decision::deny("Random region decline for {$this->region->value}")
             : Decision::allow();
     }

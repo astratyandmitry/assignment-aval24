@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\UseCases;
 
+use App\Domain\Client\Entities\Client;
 use App\Application\DTO\ApplicationCheckDTO;
 use App\Domain\Client\Exceptions\ClientNotFoundException;
 use App\Domain\Client\Repositories\ClientRepository;
@@ -18,7 +21,7 @@ final readonly class ApplicationCheck
 
     public function execute(ApplicationCheckDTO $dto): ApplicationDecision
     {
-        if (! $client = $this->clientRepository->findById($dto->clientId)) {
+        if (!($client = $this->clientRepository->findById($dto->clientId)) instanceof Client) {
             throw new ClientNotFoundException('Client not found by given ID');
         }
 

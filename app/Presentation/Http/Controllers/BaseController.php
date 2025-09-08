@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Presentation\Http\Controllers;
 
-use Exception;
+use Throwable;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as Status;
 
 abstract class BaseController
 {
-    protected function handleExceptionResponse(Exception $e): JsonResponse
+    protected function handleExceptionResponse(Throwable $e): JsonResponse
     {
         return response()->json([
             'error' => $e->getMessage(),

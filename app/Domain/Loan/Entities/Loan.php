@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Entities;
 
 use App\Domain\Client\Entities\Client;
@@ -8,14 +10,14 @@ use Carbon\Carbon;
 final readonly class Loan
 {
     public function __construct(
-        protected string $id,
-        protected Client $client,
-        protected string $name,
-        protected float $amountUsd,
-        protected int $periodDays,
-        protected float $interestRate,
-        protected Carbon $startDate,
-        protected Carbon $endDate,
+        private string $id,
+        private Client $client,
+        private string $name,
+        private float $amountUsd,
+        private int $periodDays,
+        private float $interestRate,
+        private Carbon $startDate,
+        private Carbon $endDate,
     ) {}
 
     public function id(): string

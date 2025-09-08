@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Client\Exceptions;
 
-final class ClientAlreadyExistsException extends \DomainException {}
+use DomainException;
+
+final class ClientAlreadyExistsException extends DomainException {}

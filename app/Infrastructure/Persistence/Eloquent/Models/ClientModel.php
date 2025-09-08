@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Persistence\Eloquent\Models;
 
 use App\Domain\Client\Enums\Region;
+use Database\Factories\ClientFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -19,6 +23,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 final class ClientModel extends BaseModel
 {
+    use HasFactory;
+
     protected $table = 'clients';
 
     protected function casts(): array
@@ -34,5 +40,10 @@ final class ClientModel extends BaseModel
     public function loans(): HasMany
     {
         return $this->hasMany(LoanModel::class);
+    }
+
+    protected static function newFactory(): ClientFactory
+    {
+        return ClientFactory::new();
     }
 }

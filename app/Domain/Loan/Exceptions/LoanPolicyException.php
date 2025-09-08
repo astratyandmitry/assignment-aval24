@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Exceptions;
 
-final class LoanPolicyException extends \DomainException {}
+use DomainException;
+
+final class LoanPolicyException extends DomainException {}

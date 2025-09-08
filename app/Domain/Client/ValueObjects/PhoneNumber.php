@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Client\ValueObjects;
 
 use InvalidArgumentException;
@@ -11,11 +13,11 @@ final class PhoneNumber implements Stringable
     {
         $digits = preg_replace('/\D+/', '', $value);
 
-        if (strlen($digits) < 11) {
+        if (strlen((string) $digits) < 11) {
             throw new InvalidArgumentException('Invalid Phone number format');
         }
 
-        $this->value = '+'.ltrim($digits, '+');
+        $this->value = '+'.ltrim((string) $digits, '+');
     }
 
     public function __toString(): string

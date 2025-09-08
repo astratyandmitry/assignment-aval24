@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Decision;
 
 use Closure;
@@ -8,7 +10,7 @@ final class Decision
 {
     public ?Closure $interestRateUpdater = null;
 
-    protected ?float $interestRate = 0;
+    private ?float $interestRate = 0;
 
     public function __construct(
         public readonly bool $allowed,

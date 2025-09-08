@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Client\Exceptions;
 
-final class ClientTooYoungException extends \DomainException {}
+use DomainException;
+
+final class ClientTooYoungException extends DomainException {}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Infrastructure\Providers;
 
 use App\Domain\Client\Enums\Region;
@@ -18,20 +20,18 @@ final class ProductServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \App\Domain\Loan\Policy\LoanEligibilityPolicy::class,
-            function (): LoanEligibilityPolicy {
-                return new LoanEligibilityPolicy(
-                    baseInterestRate: 0.10,
-                    rules: [
-                        new AgeRangeRule(min: 18, max: 60),
-                        new MinimumMonthlyIncomeRule(min: 1000),
-                        new MinimumCreditScoreRule(min: 500),
-                        new PeriodDaysRangeRule(min: 30, max: 90),
-                        new RegionAllowedRule(regions: Region::cases()),
-                        new RegionRandomDeclineRule(region: Region::PR),
-                        new RegionIncreaseInterestRateRule(region: Region::OS, increasePercentage: 0.05),
-                    ]);
-            }
+            LoanEligibilityPolicy::class,
+            fn(): LoanEligibilityPolicy => new LoanEligibilityPolicy(
+                baseInterestRate: 0.10,
+                rules: [
+                    new AgeRangeRule(min: 18, max: 60),
+                    new MinimumMonthlyIncomeRule(min: 1000),
+                    new MinimumCreditScoreRule(min: 500),
+                    new PeriodDaysRangeRule(min: 30, max: 90),
+                    new RegionAllowedRule(regions: Region::cases()),
+                    new RegionRandomDeclineRule(region: Region::PR),
+                    new RegionIncreaseInterestRateRule(region: Region::OS, increasePercentage: 0.05),
+                ])
         );
     }
 }

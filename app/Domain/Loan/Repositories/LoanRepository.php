@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Repositories;
 
 use App\Domain\Loan\Entities\Loan;

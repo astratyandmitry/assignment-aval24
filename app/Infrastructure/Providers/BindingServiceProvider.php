@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Providers;
 
+use App\Domain\Common\Services\IdGenerator;
+use App\Infrastructure\Services\UuidGenerator;
+use App\Domain\Client\Repositories\ClientRepository;
+use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentClientRepository;
+use App\Domain\Loan\Repositories\LoanRepository;
+use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentLoanRepository;
 use Illuminate\Support\ServiceProvider;
 
 final class BindingServiceProvider extends ServiceProvider
@@ -11,18 +17,18 @@ final class BindingServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(
-            \App\Domain\Common\Services\IdGenerator::class,
-            \App\Infrastructure\Services\UuidGenerator::class,
+            IdGenerator::class,
+            UuidGenerator::class,
         );
 
         $this->app->bind(
-            \App\Domain\Client\Repositories\ClientRepository::class,
-            \App\Infrastructure\Persistence\Eloquent\Repositories\EloquentClientRepository::class,
+            ClientRepository::class,
+            EloquentClientRepository::class,
         );
 
         $this->app->bind(
-            \App\Domain\Loan\Repositories\LoanRepository::class,
-            \App\Infrastructure\Persistence\Eloquent\Repositories\EloquentLoanRepository::class,
+            LoanRepository::class,
+            EloquentLoanRepository::class,
         );
     }
 }

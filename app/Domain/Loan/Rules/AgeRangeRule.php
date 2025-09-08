@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Rules;
 
 use App\Domain\Loan\Decision\Decision;

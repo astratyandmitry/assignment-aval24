@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Client\Entities;
 
 use App\Domain\Client\Enums\Region;
@@ -11,16 +13,16 @@ use Carbon\Carbon;
 final readonly class Client
 {
     public function __construct(
-        protected string $id,
-        protected PersonalIdentificationNumber $pin,
-        protected string $fullName,
-        protected Carbon $birthDate,
-        protected Region $region,
-        protected string $city,
-        protected PhoneNumber $phone,
-        protected EmailAddress $email,
-        protected int $creditScore,
-        protected float $monthlyIncomeUsd,
+        private string $id,
+        private PersonalIdentificationNumber $pin,
+        private string $fullName,
+        private Carbon $birthDate,
+        private Region $region,
+        private string $city,
+        private PhoneNumber $phone,
+        private EmailAddress $email,
+        private int $creditScore,
+        private float $monthlyIncomeUsd,
     ) {}
 
     public function id(): string

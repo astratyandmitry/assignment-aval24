@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Loan\Entities;
 
 use App\Domain\Client\Entities\Client;
@@ -7,9 +9,9 @@ use App\Domain\Client\Entities\Client;
 final readonly class Application
 {
     public function __construct(
-        protected Client $client,
-        protected float $amountUsd,
-        protected int $periodDays,
+        private Client $client,
+        private float $amountUsd,
+        private int $periodDays,
     ) {}
 
     public function client(): Client
