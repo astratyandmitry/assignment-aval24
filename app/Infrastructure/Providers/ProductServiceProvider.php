@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Providers;
 
+use Override;
 use App\Domain\Client\Enums\Region;
 use App\Domain\Loan\Policy\LoanEligibilityPolicy;
 use App\Domain\Loan\Policy\Rules\AgeRangeRule;
@@ -18,6 +19,7 @@ use Carbon\Laravel\ServiceProvider;
 
 final class ProductServiceProvider extends ServiceProvider
 {
+    #[Override]
     public function register(): void
     {
         $this->app->bind(
